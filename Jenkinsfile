@@ -4,32 +4,32 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'py -m pip install -r requirements.txt'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'py -m pytest'
+                bat 'python -m pytest test_app.py'
             }
         }
 
         stage('Code Quality') {
             steps {
-                bat 'py -m flake8 app.py test_app.py'
+                bat 'python -m flake8 app.py test_app.py'
             }
         }
 
         stage('Security') {
             steps {
-                bat 'py -m bandit -r .'
+                bat 'python -m bandit -r .'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'echo Deploying Flask app to local test environment'
-                bat 'start /B py app.py'
+                bat 'echo Deploying Flask app locally'
+                bat 'start /B python app.py'
             }
         }
 
