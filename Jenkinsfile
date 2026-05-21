@@ -2,34 +2,35 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build') {
             steps {
-                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m pip install -r requirements.txt'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m pytest test_app.py'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pytest test_app.py'
             }
         }
 
         stage('Code Quality') {
             steps {
-                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m flake8 app.py test_app.py'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m flake8 app.py test_app.py'
             }
         }
 
         stage('Security') {
             steps {
-                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m bandit -r .'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m bandit -r .'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'echo Deploying Flask app locally'
-                bat 'start /B "C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" app.py'
+                bat 'echo Deploying Flask application locally'
+                bat 'start /B "" "C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" app.py'
             }
         }
 
@@ -44,5 +45,6 @@ pipeline {
                 bat 'powershell -Command "Start-Sleep -Seconds 5; Invoke-WebRequest http://127.0.0.1:5000/health"'
             }
         }
+
     }
 }
