@@ -4,32 +4,32 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m pytest test_app.py'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m pytest test_app.py'
             }
         }
 
         stage('Code Quality') {
             steps {
-                bat 'python -m flake8 app.py test_app.py'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m flake8 app.py test_app.py'
             }
         }
 
         stage('Security') {
             steps {
-                bat 'python -m bandit -r .'
+                bat '"C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" -m bandit -r .'
             }
         }
 
         stage('Deploy') {
             steps {
                 bat 'echo Deploying Flask app locally'
-                bat 'start /B python app.py'
+                bat 'start /B "C:\\Users\\dubba\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe" app.py'
             }
         }
 
